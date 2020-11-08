@@ -12,7 +12,7 @@ export default function AccountStack() {
         <Stack.Screen 
         name="top-5" 
         component={Account}
-        options={{title:"Cuenta"}}
+        options={{title:" Mi Cuenta"}}
          />
       </Stack.Navigator>
     )
