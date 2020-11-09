@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function UserGuest() {
 
     const myNavigation = useNavigation();
-    console.log(myNavigation);
+    
 
     return(
         <ScrollView centerContent={true} style={styles.myViewBody}>

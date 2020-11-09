@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 import Account from "../screens/Account/Account";
 import Login from "../screens/Account/Login";
+import Register from "../screens/Account/Register";
 
 
 const Stack = createStackNavigator();
@@ -19,6 +20,11 @@ export default function AccountStack() {
             name="loginUser" // este es el que llamamos desde onPress (GuestUser)
             component={Login}
             options={{title:"Iniciar Sesión"}}
+            />
+            <Stack.Screen 
+            name="register" // este es el que llamamos desde onPress (Register)
+            component={Register}
+            options={{title:"Resgistro"}}
             />
       </Stack.Navigator>
     )
