@@ -63,7 +63,8 @@ function screenOptions(route, color) {
     
     switch (route.name) {
         case "restaurants":
-            iconName = "compass-outline";            
+            // iconName = "compass-outline"; 
+            iconName = "silverware-fork-knife";           
             break;
         case "favorites":
             iconName = "heart-outline";            
@@ -76,6 +77,7 @@ function screenOptions(route, color) {
             break;
         case "account":
             // iconName = "home-outline";
+            // iconName = "account-box";
             iconName = "account";            
             break;
     
