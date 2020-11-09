@@ -1,8 +1,12 @@
 import React from "react";
 import {StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import { Button } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 export default function UserGuest() {
+
+    const myNavigation = useNavigation();
+    console.log(myNavigation);
 
     return(
         <ScrollView centerContent={true} style={styles.myViewBody}>
@@ -13,15 +17,16 @@ export default function UserGuest() {
           />
           <Text style={styles.textA} >Consulta tú perfil de 5 Tenedores</Text>
           <Text style={styles.textB}>
-              Describe en tú experiencia, los mejores Restaurantes. Describe de una forma
-              sencilla tú experiencia y vota cual te ha gustado más.                           
+              Describe de una forma sencilla, los mejores Restaurantes que visitas,
+              tú experiencia y vota cual te ha gustado más.                           
           </Text>
           <View style={styles.myBtnView}>
               <Button
                 title="Ver tú perfil"
                 buttonStyle={styles.myBtn}
                 containerStyle={styles.myContainer}
-                onPress={() => console.log('Clik-Ver perfil')}
+                onPress={() => myNavigation.navigate("loginUser")}
+                // onPress={() => console.log('Clik-Ver perfil')}
               />              
           </View>
        </ScrollView>
