@@ -1,3 +1,7 @@
+// LOGIN  -- INICIAR SECIÓN --
+//            LOGIN
+//            REGISTER onPress={() => myNavigation.navigate("register")}
+
 import React from "react";
 import { StyleSheet, Image, ScrollView, View, Text } from "react-native";
 import { Divider } from 'react-native-elements';
@@ -14,7 +18,7 @@ export default function Login() {
               source={require("../../../assets/img/5-tenedores-letras-icono-logo.png")}
               resizeMode="contain"
               style={styles.myLogo}
-          />
+            />
           <View style={styles.viewContainer} >
             <Text>Login FORM</Text>
             <CreateAccount />

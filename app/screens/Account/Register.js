@@ -1,15 +1,28 @@
+// STACK -- INICIAR SESIÓN --
+
 import React from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
-import { Divider } from 'react-native-elements';
+import { StyleSheet, ScrollView, View, Text, Image } from "react-native";
+
+// Acá pusimos el envoltorio de correo-contraseña-confirmar....
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import RegisterForm from "../../components/accounts/RegisterForm";
 
 
 export default function Register() {    
 
     return (
-        <View>
-            <Text>Register..</Text>        
-        </View>
-        
+        <KeyboardAwareScrollView>
+            <Image 
+              source={require("../../../assets/img/5-tenedores-letras-icono-logo.png")}
+              resizeMode="contain"
+              style={styles.myLogo}
+            /> 
+            <View style={styles.myViewForm} >
+                <RegisterForm />
+            </View>
+                  
+        </KeyboardAwareScrollView>    
 
     );
 }
@@ -21,24 +34,10 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 150,
         marginTop: 20,
-    }, 
-    viewContainer: {
+    },
+    myViewForm: {
         marginRight: 40,
-        marginLeft: 40,
-    },
-    textRegistro: {
-        marginTop: 15,
-        marginLeft: 10,
-        marginRight: 10,
-
-    },
-    btnRegistrate: {
-        color: "#00a680",
-        fontWeight: "bold",
-    },
-    myDivider: {
-        backgroundColor: "#00a680",
-        margin: 40,
-    },
+        marginLeft: 40,        
+    }, 
 
 });

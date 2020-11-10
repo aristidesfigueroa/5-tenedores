@@ -1,3 +1,14 @@
+
+// Componente para REUTILIZABLE PARA MOSTRAR VISTA DE 
+//    --------------------
+//    |                  |
+//    |   CARGANDO...... |
+//    |                  | 
+//    --------------------
+// Recibe como parámetro isVisible=true text""El texto que desee= Cargando, Aguerde, recuperando etc"
+
+
+
 import React from "react";
 import {StyleSheet, View, Text, ActivityIndicator} from "react-native";
 import { Overlay } from 'react-native-elements';
@@ -11,7 +22,6 @@ export default function Loading( props ) {
         windowBackgroundColor = "rgba(0, 0, 0, 0.5)"
         overlayBackgroundColor ="tranparent"
         overlayStyle={styles.overlayMy}
-
         >
             <View style={styles.viewMy} >
                 <ActivityIndicator size="large" color="#00a680" />

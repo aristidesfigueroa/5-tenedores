@@ -1,3 +1,5 @@
+// USER GUEST 
+
 import React from "react";
 import {StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import { Button } from 'react-native-elements';

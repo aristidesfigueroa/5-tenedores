@@ -1,3 +1,10 @@
+// STACK DE -- MI CUENTA --
+//              ↓
+//             LOGIN    --> SCREEN REGISTER LOGIN 
+//              ↓
+//             REGISTER --> SCREEN REGISTER FORM 
+
+
 import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 import Account from "../screens/Account/Account";
@@ -17,7 +24,7 @@ export default function AccountStack() {
             options={{title:"Mi Cuenta"}}
             />
             <Stack.Screen 
-            name="loginUser" // este es el que llamamos desde onPress (GuestUser)
+            name="loginUser" // este es el que llamamos desde onPress (UserGuest)
             component={Login}
             options={{title:"Iniciar Sesión"}}
             />
