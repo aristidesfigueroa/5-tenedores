@@ -17,6 +17,7 @@ import { StyleSheet, View  } from "react-native";
 import { Icon,Input,Button } from 'react-native-elements';
 import {validarEmail} from '../../utils/validaciones';
 import { size, isEmpty } from 'lodash';
+import * as firebase from "firebase";
 
 export default function RegisterForm( props ) {  
     
@@ -28,7 +29,7 @@ export default function RegisterForm( props ) {
     const [formData, setformData] = useState(defaultFormData()); // Inicializa objeto vacío
 
     /* 
-        OnSubmit
+        OnSubmit()
         Acciones a realizar cuando el usuario presiona BOTON - UNIRSE - 
         #1 Validar los 3 Inputs 
         #2 Inicia validando cuenta de correo con función interna.  
@@ -45,7 +46,8 @@ export default function RegisterForm( props ) {
             validarEmail(formData.email) ? 
             (formData.password === formData.repeatPassword) ?
             (size(formData.password) >= 6)    ? 
-            refToast.current.show('VALIDACIÓN EXITOSA') :
+            autFireBase()                     :
+            // refToast.current.show('VALIDACIÓN EXITOSA') :
             refToast.current.show('password tiene que ser minimo de 6 caracteres')
 
             :
@@ -53,22 +55,37 @@ export default function RegisterForm( props ) {
             
             
             : 
-            refToast.current.show('email incorrecto');
-
-            // (formData.password === formData.repeatPassword) ?
-            // console.log('Contraseñas correctas')            :
-            // console.log('Contraseñas TIENEN QUE SER IGUALES');
-            // (size(formData.password) >= 6)    ? 
-            // console.log('VALIDACIÓN EXITOSA') :
-            // console.log('password tiene que ser minimo de 6 caracteres');
+            refToast.current.show('email incorrecto');            
             
-        }
-        
+        }        
         
     }
 
     /* 
-        OnChangeInput
+        autFireBase()
+        Para capturar el tipo de Input que se esta actualizando 
+        e : retorna el evento del <Input onChage{(e) => onChage(e, "email")} />
+        typeInput : "Input que se esta modificando"  
+    */
+   const autFireBase = () => {
+       firebase
+       .auth()
+       .createUserWithEmailAndPassword(formData.email, formData.password)
+       .then((response) => {
+        //    console.log(response);
+           refToast.current.show('Cuenta REGISTRADA');
+       })
+       .catch((err) => {
+        //    console.log(err);
+           refToast.current.show("email ya esta en uso");
+       });
+
+   }
+
+
+
+    /* 
+        OnChangeInput()
         Para capturar el tipo de Input que se esta actualizando 
         e : retorna el evento del <Input onChage{(e) => onChage(e, "email")} />
         typeInput : "Input que se esta modificando"  
