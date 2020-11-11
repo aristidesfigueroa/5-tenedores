@@ -1,5 +1,6 @@
 
 // NAVIGATION - BARRA DE ABAJO 
+
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -18,7 +19,7 @@ export default function Navigation() {
     return(
         <NavigationContainer>
             <Tab.Navigator
-             initialRouteName="restaurants"
+             initialRouteName="restaurants"  // Acá decido donde iniciar en el Navigator
              tabBarOptions={{
                  inactiveTintColor: "#646464",
                  activeTintColor: "#00a680",
