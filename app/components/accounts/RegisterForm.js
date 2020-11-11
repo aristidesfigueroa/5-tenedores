@@ -7,20 +7,83 @@
 // yarn add react-native-keyboard-aware-scroll-view@~0.9.1
 //https://classic.yarnpkg.com/es-ES/package/react-native-keyboard-aware-scroll-view
 
+// Otro paquete que se instalo para manejo de Array y así validar las contraseñas fue
+// LODASH ==>
+// Bajamos el paquete: yarn add lodash
+// OJO, luego actualizamos expo cli: yarn global add expo-cli 
+
 import React, { useState } from "react";
 import { StyleSheet, View  } from "react-native";
 import { Icon,Input,Button } from 'react-native-elements';
+import {validarEmail} from '../../utils/validaciones';
+import { size, isEmpty } from 'lodash';
 
 export default function RegisterForm() {      
     
     const [verPassC, setPassC] = useState(false); // para mostrar/ocular Constaseña 
     const [verPassR, setPassR] = useState(false); // para mostrar/ocular Constaseña 
+    // para guardar los datos de Correo-contraseña..validarlos y luego enviarlos a Firebase Capitulo 53
+    const [formData, setformData] = useState(defaultFormData()); // Inicializa objeto vacío
+
+    /* 
+        OnSubmit
+        Acciones a realizar cuando el usuario presiona BOTON - UNIRSE - 
+        #1 Validar los 3 Inputs 
+        #2 Inicia validando cuenta de correo con función interna.  
+    */
+    const onSubmit = () => {
+        if (isEmpty(formData.email)         ||
+            isEmpty(formData.password)      ||
+            isEmpty(formData.repeatPassword) ) {
+            console.log('Ingresar todos los campos');
+            
+        }else{            
+            validarEmail(formData.email) ? 
+            (formData.password === formData.repeatPassword) ?
+            (size(formData.password) >= 6)    ? 
+            console.log('VALIDACIÓN EXITOSA') :
+            console.log('password tiene que ser minimo de 6 caracteres')
+
+            :
+            console.log('Contraseñas TIENEN QUE SER IGUALES')
+            
+            
+            : 
+            console.log('email INVALIDO');
+
+            // (formData.password === formData.repeatPassword) ?
+            // console.log('Contraseñas correctas')            :
+            // console.log('Contraseñas TIENEN QUE SER IGUALES');
+            // (size(formData.password) >= 6)    ? 
+            // console.log('VALIDACIÓN EXITOSA') :
+            // console.log('password tiene que ser minimo de 6 caracteres');
+            
+        }
+        
+        
+    }
+
+    /* 
+        OnChangeInput
+        Para capturar el tipo de Input que se esta actualizando 
+        e : retorna el evento del <Input onChage{(e) => onChage(e, "email")} />
+        typeInput : "Input que se esta modificando"  
+    */
+    const onChangeInput = (e, typeInput) => {
+        // console.log(e.nativeEvent.text);
+        // console.log(typeInput);
+        // setformData({ [typeInput] : e.nativeEvent.text }); Solo deja el último valor
+        setformData({...formData,[typeInput] : e.nativeEvent.text });     
+    }
+
+
 
     return (
         <View style={styles.formContainer}>
             <Input
                 placeholder="Correo electronico"
                 containerStyle={styles.inputForm}
+                onChange={(e) => onChangeInput(e, "email")}
                 rightIcon={
                     <Icon 
                     type="material-community"
@@ -34,6 +97,7 @@ export default function RegisterForm() {
                 containerStyle={styles.inputForm}
                 password={true}
                 secureTextEntry={verPassC ? false : true}
+                onChange={(e) => onChangeInput(e, "password")}
                 rightIcon={
                     <Icon 
                     type="material-community"
@@ -48,6 +112,7 @@ export default function RegisterForm() {
                 containerStyle={styles.inputForm}
                 password={true}
                 secureTextEntry={verPassR ? false : true}
+                onChange={(e) => onChangeInput(e, "repeatPassword")}
                 rightIcon={
                     <Icon 
                     type="material-community"
@@ -60,11 +125,21 @@ export default function RegisterForm() {
             <Button
                 title="Unirse" 
                 buttonStyle={styles.myBtn}               
-                containerStyle={styles.myContainer}                
+                containerStyle={styles.myContainer} 
+                onPress={onSubmit}               
               />                      
         </View>
 );
 
+}
+
+function defaultFormData() {
+    return{
+        email: "",
+        password: "",
+        repeatPassword: "",
+
+    };
 }
 
 // Creando constante de estilos de nuestra screen "OJO StyleSheey.create" 
