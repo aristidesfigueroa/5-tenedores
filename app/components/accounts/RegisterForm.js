@@ -18,7 +18,9 @@ import { Icon,Input,Button } from 'react-native-elements';
 import {validarEmail} from '../../utils/validaciones';
 import { size, isEmpty } from 'lodash';
 
-export default function RegisterForm() {      
+export default function RegisterForm( props ) {  
+    
+    const { refToast } = props;
     
     const [verPassC, setPassC] = useState(false); // para mostrar/ocular Constaseña 
     const [verPassR, setPassR] = useState(false); // para mostrar/ocular Constaseña 
@@ -32,24 +34,26 @@ export default function RegisterForm() {
         #2 Inicia validando cuenta de correo con función interna.  
     */
     const onSubmit = () => {
+        // console.log(formData.email);
         if (isEmpty(formData.email)         ||
             isEmpty(formData.password)      ||
             isEmpty(formData.repeatPassword) ) {
-            console.log('Ingresar todos los campos');
+            // console.log('Ingresar todos los campos');
+            refToast.current.show('Todos lo campos son Obligatorios');
             
         }else{            
             validarEmail(formData.email) ? 
             (formData.password === formData.repeatPassword) ?
             (size(formData.password) >= 6)    ? 
-            console.log('VALIDACIÓN EXITOSA') :
-            console.log('password tiene que ser minimo de 6 caracteres')
+            refToast.current.show('VALIDACIÓN EXITOSA') :
+            refToast.current.show('password tiene que ser minimo de 6 caracteres')
 
             :
-            console.log('Contraseñas TIENEN QUE SER IGUALES')
+            refToast.current.show('Contraseñas no son idénticas')
             
             
             : 
-            console.log('email INVALIDO');
+            refToast.current.show('email incorrecto');
 
             // (formData.password === formData.repeatPassword) ?
             // console.log('Contraseñas correctas')            :

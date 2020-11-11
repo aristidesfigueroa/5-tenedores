@@ -28,6 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "V1.50. Register Form Completed"
+    "description": "V1.56. RegisterForm Toast"
   }
 }

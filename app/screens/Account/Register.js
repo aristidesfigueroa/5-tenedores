@@ -1,15 +1,24 @@
 // STACK -- INICIAR SESIÓN --
 
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, ScrollView, View, Text, Image } from "react-native";
 
 // Acá pusimos el envoltorio de correo-contraseña-confirmar....
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+// Importamos paquete: yarn add react-native-easy-toast@~1.2.0
+// para mostrar las alertas de formulario RegisterForm, pero lo configuramos acá en componente Register
+
+import Toast from "react-native-easy-toast";
+
+
 import RegisterForm from "../../components/accounts/RegisterForm";
 
 
-export default function Register() {    
+export default function Register() {   
+
+    const refToast = useRef();
+    // console.log(refToast);
 
     return (
         <KeyboardAwareScrollView>
@@ -19,8 +28,9 @@ export default function Register() {
               style={styles.myLogo}
             /> 
             <View style={styles.myViewForm} >
-                <RegisterForm />
+                <RegisterForm refToast={refToast} />
             </View>
+            <Toast ref={refToast} position="center" opacity={0.9} />
                   
         </KeyboardAwareScrollView>    
 
