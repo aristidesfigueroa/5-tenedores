@@ -24,6 +24,8 @@ import { size, isEmpty } from 'lodash';
 import * as firebase from "firebase";
 import { useNavigation } from '@react-navigation/native/'
 
+import Loading from "../Loading";
+
 
 import {validarEmail} from '../../utils/validaciones';
 
@@ -35,6 +37,9 @@ export default function RegisterForm( props ) {
     const [verPassR, setPassR] = useState(false); // para mostrar/ocular Constaseña 
     // para guardar los datos de Correo-contraseña..validarlos y luego enviarlos a Firebase Capitulo 53
     const [formData, setformData] = useState(defaultFormData()); // Inicializa objeto vacío
+    const [loading, setLoading] = useState(false); // para controlar Loading.js
+
+
 
     const myNavigation = useNavigation(); // para irme a UserLogged.js
 
@@ -75,23 +80,25 @@ export default function RegisterForm( props ) {
 
     /* 
         autFireBase()
-        Para capturar el tipo de Input que se esta actualizando 
-        e : retorna el evento del <Input onChage{(e) => onChage(e, "email")} />
-        typeInput : "Input que se esta modificando"  
+        Enviar a Firebase para registrar Cuenta
     */
    const autFireBase = () => {
+       setLoading(true);
+    
        firebase
        .auth()
        .createUserWithEmailAndPassword(formData.email, formData.password)
        .then((response) => {
-        //    console.log(response);
-           refToast.current.show('Cuenta REGISTRADA');
-           myNavigation.navigate("account");
+        //    console.log(response);        
+           setLoading(false);
+           myNavigation.navigate("account"); // es enviado Account.js para ir a UserLogged.js
        })
        .catch((err) => {
+           setLoading(false);
         //    console.log(err);
-           refToast.current.show("email ya esta en uso");
-       });
+           refToast.current.show("email ya esta en uso, pruebe otro");
+       });        
+       
 
    }
 
@@ -161,7 +168,8 @@ export default function RegisterForm( props ) {
                 buttonStyle={styles.myBtn}               
                 containerStyle={styles.myContainer} 
                 onPress={onSubmit}               
-              />                      
+              />  
+              <Loading isVisible={loading} text="Registrando Cuenta" />                     
         </View>
 );
 

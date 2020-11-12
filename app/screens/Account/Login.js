@@ -2,30 +2,38 @@
 //            LOGIN
 //            REGISTER onPress={() => myNavigation.navigate("register")}
 
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, Image, ScrollView, View, Text } from "react-native";
 import { Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import Toast from "react-native-easy-toast";
+
+
+import LoginForm from '../../components/accounts/LoginForm';
 
 
 export default function Login() {  
+    
+    const refToast = useRef();
     
     
 
     return (
         <ScrollView>
+        
             <Image 
               source={require("../../../assets/img/5-tenedores-letras-icono-logo.png")}
               resizeMode="contain"
               style={styles.myLogo}
             />
           <View style={styles.viewContainer} >
-            <Text>Login FORM</Text>
+            <LoginForm refToast={refToast} />
             <CreateAccount />
-          </View>
+          </View>          
           <Divider style={styles.myDivider} />
           <Text>Social Login</Text>
-            
+          <Toast ref={refToast} position="center" opacity={0.9} />
+
         </ScrollView>
         
 
