@@ -1,5 +1,9 @@
 
 // -- MI CUENTA --
+// Consulta en FIREBASE rapidamente cuanto abajo se PRESIONA MI CUENTA, si el usuario dependiendo este 
+// o no LOGEADO lo envia a UserLogged o UserGuest
+
+
 
 import React, { useState, useEffect } from "react";
 import * as firebase from "firebase";

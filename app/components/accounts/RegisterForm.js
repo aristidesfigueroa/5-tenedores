@@ -12,12 +12,20 @@
 // Bajamos el paquete: yarn add lodash
 // OJO, luego actualizamos expo cli: yarn global add expo-cli 
 
+// Vamos a implementar que cuando el usuario se registre en FireBase, se vaya directo a UserLogged.js
+// y no le toque estar back, back 
+// entonces importamos 
+// 
+
 import React, { useState } from "react";
 import { StyleSheet, View  } from "react-native";
 import { Icon,Input,Button } from 'react-native-elements';
-import {validarEmail} from '../../utils/validaciones';
 import { size, isEmpty } from 'lodash';
 import * as firebase from "firebase";
+import { useNavigation } from '@react-navigation/native/'
+
+
+import {validarEmail} from '../../utils/validaciones';
 
 export default function RegisterForm( props ) {  
     
@@ -27,6 +35,10 @@ export default function RegisterForm( props ) {
     const [verPassR, setPassR] = useState(false); // para mostrar/ocular Constaseña 
     // para guardar los datos de Correo-contraseña..validarlos y luego enviarlos a Firebase Capitulo 53
     const [formData, setformData] = useState(defaultFormData()); // Inicializa objeto vacío
+
+    const myNavigation = useNavigation(); // para irme a UserLogged.js
+
+
 
     /* 
         OnSubmit()
@@ -46,8 +58,8 @@ export default function RegisterForm( props ) {
             validarEmail(formData.email) ? 
             (formData.password === formData.repeatPassword) ?
             (size(formData.password) >= 6)    ? 
-            autFireBase()                     :
-            // refToast.current.show('VALIDACIÓN EXITOSA') :
+            autFireBase()                     : // función que registra cuenta mail
+             
             refToast.current.show('password tiene que ser minimo de 6 caracteres')
 
             :
@@ -74,6 +86,7 @@ export default function RegisterForm( props ) {
        .then((response) => {
         //    console.log(response);
            refToast.current.show('Cuenta REGISTRADA');
+           myNavigation.navigate("account");
        })
        .catch((err) => {
         //    console.log(err);

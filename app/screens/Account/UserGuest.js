@@ -1,4 +1,5 @@
-// USER GUEST 
+// UserGuest.js (Usario no Logeado) viene de  <-- Accoun.js (donde revisa en fireBase el user )
+// si el usuario este logeado, en vez de venir acá lo manda a UserLogged.js
 
 import React from "react";
 import {StyleSheet, View, Text, Image, ScrollView } from "react-native";
