@@ -6,23 +6,35 @@
 // react-native-elements porque tiene mas propiedades
 
 
-import React, {useRef, useState } from "react";
+import React, {useRef, useState, useEffect } from "react";
 import {StyleSheet, Text, View } from "react-native";
 import { Button } from 'react-native-elements';
 import * as firebase from "firebase";
 import Toast from "react-native-easy-toast";
 
 import Loading from "../../components/Loading";
+import InfoUser from "../../components/accounts/InfoUser";
 
 export default function UserLogged() {
 
     const refToast = useRef();
     const [loading, setLoading] = useState(false); // para controlar Loading.js
     const [loadingText, setLoadingText] = useState(""); // para controlar Loading.js
+    const [userInfo, setUserInfo] = useState({}); // datos user recuperados useEffect
+
+    useEffect(() => {
+
+        (async () => {
+            const user = await firebase.auth().currentUser;
+            setUserInfo(user);
+        })()
+        
+    }, [])
 
     return(
         <View style={styles.formContainer} >
-            <Text>InfoUser...</Text>
+            {/* { userInfo && <InfoUser userInfo={userInfo} /> } //Para renderizar si hay datos */}
+            <InfoUser userInfo={userInfo} />
             <Text>AccountOptions...</Text>
             <Button 
             title="Cerrar Sesión"

@@ -82,7 +82,7 @@ export default function LoginForm( props ) {
         */
       const valFireBase = () => {
 
-        console.log('valFireBase');
+        // console.log('valFireBase');
         setLoading(true);
     
         firebase
