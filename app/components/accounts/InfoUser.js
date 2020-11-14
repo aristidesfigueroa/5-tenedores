@@ -15,12 +15,13 @@ import * as ImagePicker from 'expo-image-picker';
 
 export default function InfoUser( props ) {
 
-    const {userInfo} = props;
+    const { userInfo, refToast} = props;
     console.log(userInfo);
 
     const { photoURL } = userInfo;
     const { displayName } = userInfo;
-    const { email } = userInfo;    
+    const { email } = userInfo;  
+    
 
     // console.log('El mail es ==> ' + email);
 
@@ -34,7 +35,24 @@ export default function InfoUser( props ) {
 
      const onChangeAvatar = async () => {
          const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-         console.log(resultPermission);
+         const resultPermissionCamera = resultPermission.permissions.cameraRoll.status;
+        //  const resultPermissionExpires = resultPermission.permissions.cameraRoll.expires;
+        //  console.log(resultPermission);
+        //  console.log("ResultPERMIS ==> " + resultPermission);
+        //  console.log("ResultCAMERA ==> " + resultPermissionCamera);
+        //  console.log("ResultEXPIRE ==> " + resultPermissionExpires);
+
+        if (resultPermissionCamera === "denied") {            
+            refToast.current.show("Es necesario aceptar los permisos de la galería"); 
+                    
+        }else{
+            // Abrimos camará o galería
+            const result = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [4,4],
+            });
+            console.log(result);
+        }
      }
 
 

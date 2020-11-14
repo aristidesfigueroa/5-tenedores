@@ -34,7 +34,7 @@ export default function UserLogged() {
     return(
         <View style={styles.formContainer} >
             {/* { userInfo && <InfoUser userInfo={userInfo} /> } //Para renderizar si hay datos */}
-            <InfoUser userInfo={userInfo} />
+            <InfoUser userInfo={userInfo} refToast={refToast}  />
             <Text>AccountOptions...</Text>
             <Button 
             title="Cerrar Sesión"
