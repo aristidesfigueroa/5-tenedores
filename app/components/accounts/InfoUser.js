@@ -8,6 +8,9 @@
 import React from 'react';
 import { StyleSheet, View, Text  } from "react-native";
 import { Avatar, Accessory } from 'react-native-elements';
+import * as firebase from "firebase";
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 
 export default function InfoUser( props ) {
@@ -19,7 +22,20 @@ export default function InfoUser( props ) {
     const { displayName } = userInfo;
     const { email } = userInfo;    
 
-    console.log('El mail es ==> ' + email);
+    // console.log('El mail es ==> ' + email);
+
+    /**
+     * 
+     * onChangeAvatar() ASINCRONA
+     * Presiono Avatar para modificarlo, antes agregamos dependencias, depués de haber habilitado una
+     * carpetar /avatar en firebase, en app.json puesto la propiedad "permissions": [CAMERA_ROLL]
+     * 
+     */
+
+     const onChangeAvatar = async () => {
+         const resultPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+         console.log(resultPermission);
+     }
 
 
     return(
@@ -28,6 +44,7 @@ export default function InfoUser( props ) {
                 rounded
                 size="large"
                 showEditButton
+                onEditPress={onChangeAvatar}
                 containerStyle={styles.useInfoAvatar}
                 source={photoURL ? {uri:photoURL} : require("../../../assets/img/avatar-default.jpg") }
 
