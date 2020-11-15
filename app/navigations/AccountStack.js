@@ -24,7 +24,7 @@ export default function AccountStack() {
             options={{title:"Mi Cuenta"}}
             />
             <Stack.Screen 
-            name="loginUser" // este es el que llamamos desde onPress (UserGuest)
+            name="login" // este es el que llamamos desde onPress (UserGuest)
             component={Login}
             options={{title:"Iniciar Sesión"}}
             />

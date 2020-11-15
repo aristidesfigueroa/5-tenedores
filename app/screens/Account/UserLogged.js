@@ -20,7 +20,7 @@ export default function UserLogged() {
     const refToast = useRef();
     const [loading, setLoading] = useState(false); // para controlar Loading.js
     const [loadingText, setLoadingText] = useState(""); // para controlar Loading.js
-    const [userInfo, setUserInfo] = useState({}); // datos user recuperados useEffect
+    const [userInfo, setUserInfo] = useState(null); // datos user recuperados useEffect
 
     useEffect(() => {
 
@@ -33,8 +33,15 @@ export default function UserLogged() {
 
     return(
         <View style={styles.formContainer} >
-            {/* { userInfo && <InfoUser userInfo={userInfo} /> } //Para renderizar si hay datos */}
-            <InfoUser userInfo={userInfo} refToast={refToast}  />
+            
+            { userInfo && (<InfoUser 
+            userInfo={userInfo} 
+            refToast={refToast}
+            setLoading={setLoading} 
+            setLoadingText={setLoadingText}
+            /> ) } 
+
+            {/* <InfoUser userInfo={userInfo} refToast={refToast}  /> */}
             <Text>AccountOptions...</Text>
             <Button 
             title="Cerrar Sesión"

@@ -28,7 +28,7 @@ export default function UserGuest() {
                 title="Ver tú perfil"
                 buttonStyle={styles.myBtn}
                 containerStyle={styles.myContainer}
-                onPress={() => myNavigation.navigate("loginUser")}
+                onPress={() => myNavigation.navigate("login")}
                 // onPress={() => console.log('Clik-Ver perfil')}
               />              
           </View>
